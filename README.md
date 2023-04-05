@@ -5,9 +5,9 @@ This code is WIP and currently only supports reading CSV and Parquet datasets. T
 
 
 ## Dependencies
-The script uses `pandas` to access the dataset and send each row as a single streaming message to an Apache Kafka cluster. 
+The `stream-this-dataset.py` script uses `pandas` to access the dataset and send each row as a single streaming message to an Apache Kafka cluster. 
 
-A second example script is included that shows how you could read the data stream from Kafka and analyse it; in this case compiling a list of the locations with the most generous tips. This analysis script uses [`pathway`](www.pathway.com) to perform real-time streaming analysis.
+A second example script (`analyze-stream-realtime.py`) is included that shows how you could read the data stream from Kafka and analyse it; in this case compiling a list of the locations with the most generous tips. This analysis script uses [`pathway`](www.pathway.com) to perform real-time streaming analysis.
 
 
 ## Sample Datasets
