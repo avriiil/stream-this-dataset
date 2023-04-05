@@ -13,6 +13,8 @@ A second example script is included that shows how you could read the data strea
 ## Sample Datasets
 Sample CSV and Parquet files containing rideshare (Uber/Lyft) data from the New York City Taxi and Limousine Commission (TLC) Trip Record* dataset are provided. These are subsampled from the dataset for January 2022. Licensing information for this dataset can be found at https://www.nyc.gov/home/terms-of-use.page.
 
+The dataset path needs to be passed as a command line argument when running the script: `python stream-this-dataset.py path/to/dataset.parquet`
+
 
 ## A Note on Infrastructure
 The Apache Kafka cluster is provisioned through [Upstash](www.upstash.com) which gives you a free, single-replica Kafka cluster. You will need to create an account to run this script yourself. Make sure to set the credentials as environment variables.
