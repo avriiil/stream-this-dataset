@@ -41,14 +41,14 @@ start = time.time()
 for index, row in data.iterrows():
     message = row.to_json().encode("utf-8")
     producer.send(topic, message)
-    time.sleep(0.1)
+    time.sleep(0.01)
 
 # end timer
 end = time.time()
 elapsed = end - start
 
 print("Data sent to Kafka cluster")
-print(f"It took {elapsed} to stream this dataset containing {len(data)/1000}K rows")
+print(f"It took {round(elapsed, 2)} seconds to stream this dataset containing {len(data)/1000}K rows")
 
 # close stream
 producer.close()

@@ -44,17 +44,17 @@ input_trips = pw.kafka.read(
 )
 
 # remove entries with driver_pay = 0 and tips = 0
-input_trips = input_trips.filter(pw.this.driver_pay > 0)
-input_trips = input_trips.filter(pw.this.tips > 0)
+input_trips = input_trips.filter(pw.this.driver_pay > float(0))
+input_trips = input_trips.filter(pw.this.tips > float(0))
 
 # create column with tip as percentage of driver_pay
 tip_trips = input_trips.select(
     *pw.this,
-    tip_percentage=pw.this.tips / pw.this.driver_pay * 100,
+    tip_percentage=pw.this.tips / pw.this.driver_pay * float(100),
 )
 
 # filter out generous tips (>= 30% of driver_pay)
-generous_trips = tip_trips.filter(pw.this.tip_percentage > 30)
+generous_trips = tip_trips.filter(pw.this.tip_percentage > float(30))
 
 # use generous trips to get a list of PULocations
 # where each row is a generous PULocationID with the tip_percentage
@@ -63,6 +63,8 @@ locations = generous_trips.groupby(pw.this.PULocationID).reduce(
     tip_percentage=pw.reducers.sorted_tuple(pw.this.tip_percentage),
 )
 
-pw.csv.write(locations, "./high-value-locations-from-kafka.csv")
-print("CSV output file written to disk.")
+# output results to CSV file
+pw.csv.write(locations, "./output-high-tip-locations.csv")
+
+# run the pathway engine
 pw.run()
